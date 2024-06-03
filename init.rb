@@ -27,3 +27,26 @@ require 'autoproj/git_server_configuration'
 
 Autoproj.env_inherit 'CMAKE_PREFIX_PATH'
 
+# autoload config seed (https://github.com/rock-core/autoproj/issues/364)
+# allows to load a seed-config.yml file from a buildconf repository
+# rather than providing it before checkout using the --seed-config paramater
+# of the autoproj_bootstrap script
+# this allows to bootstrap with --no-interactive and still apply a custom config e.g. in CI/CD
+# The call to this function has to be in the init.rb of the buildconf BEFORE any other
+# config option, e.g. the git server configuration settings
+# The filename parameter is the name of the config seed yml file in the repository
+def define_default_config_seed_in_buildconf(filename)
+    Autoproj.configuration_option 'use_default_config', 'boolean',
+    :default => "yes",
+    :doc => ["Should the default workspace config be used?", "This buildconf defines a default configuration", "Should it be applied?"]
+    if (Autoproj.user_config('use_default_config')) then
+        unless Autoproj.config.has_value_for?('default_config_applied')
+            seed_config = File.join(Autoproj.workspace.root_dir, 'autoproj', filename)
+            Autoproj.message "loading seed config #{seed_config}"
+            Autoproj.config.load(path: seed_config)
+            Autoproj.config.set 'default_config_applied', true, true
+        end
+    end
+end
+
+define_default_config_seed_in_buildconf("config_seed.yml")
