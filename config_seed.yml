@@ -1,0 +1,35 @@
+---
+prefer_indep_over_os_packages: false
+osdeps_mode: all
+apt_dpkg_update: true
+GITHUB: http
+GITHUB_ROOT: https://github.com
+GITHUB_PUSH_ROOT: 'git@github.com:'
+SPACEGIT: http
+SPACEGIT_ROOT: https://git.hb.dfki.de
+SPACEGIT_PUSH_ROOT: https://git.hb.dfki.de
+DFKIGIT: http
+DFKIGIT_ROOT: https://git.hb.dfki.de
+DFKIGIT_PUSH_ROOT: https://git.hb.dfki.de
+ldgold: false
+DEB_USE: false
+debian_release: master-20.06
+ROCK_SELECTED_FLAVOR: master
+DEB_AUTOMATIC: true
+NDLCOM_ROBOTCONFIG: Coyote3Config
+ROCK_BRANCH: master
+typelib_cxx_loader: castxml
+USE_PYTHON: true
+python_executable: "/usr/bin/python3"
+USE_OCL: false
+rtt_target: gnulinux
+rtt_corba_implementation: omniorb
+ccache: true
+iceCC: true
+iceCC_parallel: '15'
+GITLAB: http
+GITLAB_ROOT: https://gitlab.com
+GITLAB_PUSH_ROOT: https://gitlab.com
+GITLAB_PRIVATE_ROOT: https://gitlab.com
+use_default_config: true
+
